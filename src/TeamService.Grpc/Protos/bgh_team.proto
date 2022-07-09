@@ -5,38 +5,48 @@ option csharp_namespace = "TeamService.Grpc";
 package bgh_team;
 
 service TeamService {
-  rpc CreateTeam (.bgh_team.Team) 
-  returns (.bgh_team.CreateResponse);
+  rpc CreateTeam (.bgh_team.CreateTeamRequest) 
+  returns (.bgh_team.CreateTeamResponse);
   rpc GetTeam (.bgh_team.GetTeamRequest) 
-  returns (.bgh_team.Team);
-  rpc UpdateTeam (.bgh_team.Team)
-  returns (.bgh_team.UpdateResponse);
+  returns (.bgh_team.GetTeamResponse);
+  rpc UpdateTeam (.bgh_team.UpdateTeamRequest)
+  returns (.bgh_team.UpdateTeamResponse);
   rpc DeleteTeam (.bgh_team.DeleteTeamRequest)
-  returns (.bgh_team.DeleteResponse);
+  returns (.bgh_team.DeleteTeamResponse);
+}
+
+message CreateTeamRequest {
+  string id = 1;
+  repeated Player players = 2;
+}
+
+message CreateTeamResponse {
 }
 
 message GetTeamRequest {
   string id = 1;
 }
 
-message DeleteTeamRequest {
-  string id = 1;
-}
-
-message Team {
+message GetTeamResponse{
   string id = 1;
   repeated Player players = 2;
 }
 
-message Player {
+message UpdateTeamRequest {
+  string id = 1;
+  repeated Player players = 2;
+}
+
+message UpdateTeamResponse {
+}
+
+message DeleteTeamRequest {
   string id = 1;
 }
 
-message CreateResponse {
+message DeleteTeamResponse {
 }
 
-message UpdateResponse {
-}
-
-message DeleteResponse {
+message Player {
+  string id = 1;
 }
