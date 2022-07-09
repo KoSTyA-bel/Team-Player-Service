@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option csharp_namespace = "TeamService.Grpc";
+
+package bgh_team;
+
+service TeamService {
+  rpc CreateTeam (.bgh_team.Team) 
+  returns (.bgh_team.CreateResponse);
+  rpc GetTeam (.bgh_team.GetTeamRequest) 
+  returns (.bgh_team.Team);
+  rpc UpdateTeam (.bgh_team.Team)
+  returns (.bgh_team.UpdateResponse);
+  rpc DeleteTeam (.bgh_team.DeleteTeamRequest)
+  returns (.bgh_team.DeleteResponse);
+}
+
+message GetTeamRequest {
+  string id = 1;
+}
+
+message DeleteTeamRequest {
+  string id = 1;
+}
+
+message Team {
+  string id = 1;
+  repeated Player players = 2;
+}
+
+message Player {
+  string id = 1;
+}
+
+message CreateResponse {
+}
+
+message UpdateResponse {
+}
+
+message DeleteResponse {
+}
