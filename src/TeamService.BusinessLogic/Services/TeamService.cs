@@ -6,19 +6,35 @@ namespace TeamService.BusinessLogic.Services;
 public class TeamService : IService<Team>
 {
     private readonly IRepository<Team> _repository;
+    private readonly IDataContext _dataContext;
 
     public TeamService(IRepository<Team> repository)
     {
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
 
-    public Task<Team> Create(Team entity) => _repository.Create(entity);
+    public async Task<Team> Create(Team entity)
+    {
+        await _repository.Create(entity);
+        await _dataContext.SaveChangesAsync(new CancellationToken());
+        return entity;
+    }
 
-    public Task<bool> Delete(Guid id) => _repository.Delete(id);
+    public async Task<bool> Delete(Guid id)
+    {
+        await _repository.Delete(id);
+        await _dataContext.SaveChangesAsync(new CancellationToken());
+        return true;
+    }
 
     public Task<IEnumerable<Team>> GetRange(int startPoint, int count) => _repository.GetRange(startPoint, count);
 
-    public Task<Team> Update(Team entity) => _repository.Update(entity);
+    public async Task<Team> Update(Team entity)
+    {
+        await _repository.Update(entity);
+        await _dataContext.SaveChangesAsync(new CancellationToken());
+        return entity;
+    }
 
     public bool TryGetById(Guid id, out Team entity)
     {
