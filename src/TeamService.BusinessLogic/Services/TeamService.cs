@@ -12,13 +12,25 @@ public class TeamService : IService<Team>
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
 
-    public Task<Team> Create(Team entity) => _repository.Create(entity);
+    public async Task<Team> Create(Team entity)
+    {
+        await _repository.Create(entity);
+        return entity;
+    }
 
-    public Task<bool> Delete(Guid id) => _repository.Delete(id);
+    public async Task<bool> Delete(Guid id)
+    {
+        await _repository.Delete(id);
+        return true;
+    }
 
     public Task<IEnumerable<Team>> GetRange(int startPoint, int count) => _repository.GetRange(startPoint, count);
 
-    public Task<Team> Update(Team entity) => _repository.Update(entity);
+    public async Task<Team> Update(Team entity)
+    {
+        await _repository.Update(entity);
+        return entity;
+    }
 
     public bool TryGetById(Guid id, out Team entity)
     {
