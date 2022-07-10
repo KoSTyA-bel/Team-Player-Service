@@ -8,7 +8,7 @@ public interface IService<T> where T : class
 
     public Task<T> Update(T entity);
 
-    public Task<bool> Delete(int id);
+    public Task<bool> Delete(Guid id);
 
     public Task<IEnumerable<T>> GetRange(int startPoint, int count);
 }

@@ -12,28 +12,18 @@ public class TeamService : IService<Team>
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
 
-    public Task<Team> Create(Team entity)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<Team> Create(Team entity) => _repository.Create(entity);
 
-    public Task<bool> Delete(int id)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<bool> Delete(Guid id) => _repository.Delete(id);
 
-    public Task<IEnumerable<Team>> GetRange(int startPoint, int count)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<IEnumerable<Team>> GetRange(int startPoint, int count) => _repository.GetRange(startPoint, count);
+
+    public Task<Team> Update(Team entity) => _repository.Update(entity);
 
     public bool TryGetById(Guid id, out Team entity)
     {
-        throw new NotImplementedException();
-    }
+        entity = _repository.GetById(id).GetAwaiter().GetResult();
 
-    public Task<Team> Update(Team entity)
-    {
-        throw new NotImplementedException();
+        return entity != null;
     }
 }

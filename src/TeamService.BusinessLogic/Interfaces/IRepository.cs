@@ -8,7 +8,7 @@ public interface IRepository<T> where T : class
 
     public Task<T> Update(T entity);
 
-    public Task<bool> Delete(T entity);
+    public Task<bool> Delete(Guid entity);
 
     public Task<IEnumerable<T>> GetRange(int startPoint, int count);
 }
