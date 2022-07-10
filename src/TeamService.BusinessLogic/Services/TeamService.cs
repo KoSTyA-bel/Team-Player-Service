@@ -6,6 +6,7 @@ namespace TeamService.BusinessLogic.Services;
 public class TeamService : IService<Team>
 {
     private readonly IRepository<Team> _repository;
+    private readonly IDataContext _dataContext;
 
     public TeamService(IRepository<Team> repository)
     {
@@ -15,12 +16,14 @@ public class TeamService : IService<Team>
     public async Task<Team> Create(Team entity)
     {
         await _repository.Create(entity);
+        await _dataContext.SaveChangesAsync(new CancellationToken());
         return entity;
     }
 
     public async Task<bool> Delete(Guid id)
     {
         await _repository.Delete(id);
+        await _dataContext.SaveChangesAsync(new CancellationToken());
         return true;
     }
 
@@ -29,6 +32,7 @@ public class TeamService : IService<Team>
     public async Task<Team> Update(Team entity)
     {
         await _repository.Update(entity);
+        await _dataContext.SaveChangesAsync(new CancellationToken());
         return entity;
     }
 
