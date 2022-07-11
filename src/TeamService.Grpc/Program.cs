@@ -18,13 +18,16 @@ builder.Services.AddScoped<IDataContext, TeamDataContext>();
 //
 
 builder.Services.AddScoped<IRepository<Team>, TeamRepository>();
+builder.Services.AddScoped<IRepository<Player>, PlayerRepository>();
 builder.Services.AddScoped<IService<Team>, TeamService.BusinessLogic.Services.TeamService>();
+builder.Services.AddScoped<IService<Player>, TeamService.BusinessLogic.Services.PlayerService>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
 app.MapGrpcService<TeamService.Grpc.Services.TeamService>();
+app.MapGrpcService<TeamService.Grpc.Services.PlayerService>();
 
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 
