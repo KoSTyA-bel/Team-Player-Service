@@ -1,4 +1,5 @@
-﻿using TeamService.BusinessLogic.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using TeamService.BusinessLogic.Entities;
 using TeamService.BusinessLogic.Interfaces;
 using TeamService.DataAccess.Contexts;
 
@@ -25,10 +26,7 @@ public class PlayerRepository : IRepository<Player>
         _context.Player.Remove(player);
     }
 
-    public Task<Player> GetById(Guid id)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<Player> GetById(Guid id) => _context.Player.FirstAsync(p => p.Id == id);
 
     public Task<IEnumerable<Player>> GetRange(int startPoint, int count)
     {
@@ -37,6 +35,13 @@ public class PlayerRepository : IRepository<Player>
 
     public Task Update(Player entity)
     {
-        throw new NotImplementedException();
+        if (_context.Entry(entity).State == EntityState.Detached)
+        {
+            _context.Attach(entity);
+        }
+
+        _context.Entry(entity).State = EntityState.Modified;
+
+        return Task.CompletedTask;
     }
 }
