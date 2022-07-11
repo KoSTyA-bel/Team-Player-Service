@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+option csharp_namespace = "Service.Grpc";
+
+package bgh_player;
+
+service PlayerService {
+  rpc CreatePlayer (.bgh_player.CreatePlayerRequest) 
+  returns (.bgh_player.CreatePlayerResponse);
+  rpc GetPlayer (.bgh_player.GetPlayerRequest) 
+  returns (.bgh_player.GetPlayerResponse);
+  rpc UpdatePlayer (.bgh_player.UpdatePlayerRequest)
+  returns (.bgh_player.UpdatePlayerResponse);
+  rpc DeletePlayer (.bgh_player.DeletePlayerRequest)
+  returns (.bgh_player.DeletePlayerResponse);
+}
+
+message CreatePlayerRequest {
+  string name = 1;
+  string team = 2;
+}
+
+message CreatePlayerResponse {
+}
+
+message GetPlayerRequest {
+  string id = 1;
+}
+
+message GetPlayerResponse{
+  string id = 1;
+  string name = 2;
+  string team = 3;
+}
+
+message UpdatePlayerRequest {
+  string id = 1;
+  string name = 2;
+  string team = 3;
+}
+
+message UpdatePlayerResponse {
+}
+
+message DeletePlayerRequest {
+  string id = 1;
+}
+
+message DeletePlayerResponse {
+}
