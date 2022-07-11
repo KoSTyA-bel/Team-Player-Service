@@ -9,9 +9,9 @@ service PlayerService {
   returns (.bgh_player.CreatePlayerResponse);
   rpc GetPlayer (.bgh_player.GetPlayerRequest) 
   returns (.bgh_player.GetPlayerResponse);
-  rpc UpdateTeam (.bgh_player.UpdatePlayerRequest)
+  rpc UpdatePlayer (.bgh_player.UpdatePlayerRequest)
   returns (.bgh_player.UpdatePlayerResponse);
-  rpc DeleteTeam (.bgh_player.DeletePlayerRequest)
+  rpc DeletePlayer (.bgh_player.DeletePlayerRequest)
   returns (.bgh_player.DeletePlayerResponse);
 }
 
