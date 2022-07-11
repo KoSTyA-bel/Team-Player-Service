@@ -35,6 +35,13 @@ public class TeamRepository : IRepository<Team>
 
     public Task Update(Team entity)
     {
-        throw new NotImplementedException();
+        if (_context.Entry(entity).State == EntityState.Detached)
+        {
+            _context.Attach(entity);
+        }
+
+        _context.Entry(entity).State = EntityState.Modified;
+
+        return Task.CompletedTask;
     }
 }

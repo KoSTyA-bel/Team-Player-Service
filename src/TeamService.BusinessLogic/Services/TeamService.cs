@@ -8,9 +8,10 @@ public class TeamService : IService<Team>
     private readonly IRepository<Team> _repository;
     private readonly IDataContext _dataContext;
 
-    public TeamService(IRepository<Team> repository)
+    public TeamService(IRepository<Team> repository, IDataContext dataContext)
     {
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+        _dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
     }
 
     public async Task<Team> Create(Team entity)
