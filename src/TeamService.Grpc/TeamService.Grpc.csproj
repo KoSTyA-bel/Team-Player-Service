@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\bgh_player.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\bgh_player.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\bgh_team.proto" GrpcServices="Server" />
   </ItemGroup>
 
