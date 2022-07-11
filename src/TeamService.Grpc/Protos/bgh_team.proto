@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Proto";
+option csharp_namespace = "Service.Grpc";
 
 package bgh_team;
 
@@ -16,8 +16,7 @@ service TeamService {
 }
 
 message CreateTeamRequest {
-  string id = 1;
-  repeated Player players = 2;
+  string name = 1;
 }
 
 message CreateTeamResponse {
@@ -29,12 +28,12 @@ message GetTeamRequest {
 
 message GetTeamResponse{
   string id = 1;
-  repeated Player players = 2;
+  string name = 2;
 }
 
 message UpdateTeamRequest {
   string id = 1;
-  repeated Player players = 2;
+  string name = 2;
 }
 
 message UpdateTeamResponse {
@@ -45,8 +44,4 @@ message DeleteTeamRequest {
 }
 
 message DeleteTeamResponse {
-}
-
-message Player {
-  string id = 1;
 }

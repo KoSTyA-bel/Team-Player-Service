@@ -1,6 +1,4 @@
-﻿using TeamService.BusinessLogic.Clients.Playerlient;
-
-namespace TeamService.BusinessLogic.Entities;
+﻿namespace TeamService.BusinessLogic.Entities;
 
 public class Team
 {

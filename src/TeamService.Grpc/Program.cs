@@ -1,3 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using TeamService.BusinessLogic.Entities;
+using TeamService.BusinessLogic.Interfaces;
+using TeamService.DataAccess.Contexts;
+using TeamService.DataAccess.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Additional configuration is required to successfully run gRPC on macOS.
@@ -5,6 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+
+// insert into other method
+builder.Services.AddDbContextPool<TeamContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=Test;User Id=postgres;Password=kofein"));
+builder.Services.AddScoped<IDataContext, TeamDataContext>();
+//
+
+builder.Services.AddScoped<IRepository<Team>, TeamRepository>();
+builder.Services.AddScoped<IService<Team>, TeamService.BusinessLogic.Services.TeamService>();
 
 var app = builder.Build();
 

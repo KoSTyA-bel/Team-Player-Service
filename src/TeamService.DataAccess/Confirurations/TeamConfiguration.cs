@@ -13,8 +13,6 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
 
         builder.Property(team => team.Name).IsRequired();
 
-        builder.Property(team => team.Players).IsRequired();
-
         builder.ToTable("Teams");
     }
 }
