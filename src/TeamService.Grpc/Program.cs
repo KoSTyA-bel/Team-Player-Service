@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddGrpc();
 
 // insert into other method
-builder.Services.AddDbContextPool<TeamContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=Test;User Id=postgres;Password=kofein"));
+builder.Services.AddDbContextPool<TeamContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Data")));
 builder.Services.AddScoped<IDataContext, TeamDataContext>();
 //
 
