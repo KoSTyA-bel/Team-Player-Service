@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using TeamService.BusinessLogic.Entities;
 using TeamService.BusinessLogic.Interfaces;
 using Service.Grpc;
+using AutoMapper;
 
 namespace TeamService.Grpc.Services;
 
@@ -11,47 +12,35 @@ public class PlayerService : Service.Grpc.PlayerService.PlayerServiceBase
 {
     private readonly ILogger<TeamService> _logger;
     private readonly IService<Player> _service;
+    private readonly IMapper _mapper;
 
-    public PlayerService(ILogger<TeamService> logger, IService<Player> service)
+    public PlayerService(ILogger<TeamService> logger, IService<Player> service, IMapper mapper)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _service = service ?? throw new ArgumentNullException(nameof(service));
+        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
     public override async Task<CreatePlayerResponse> CreatePlayer(CreatePlayerRequest request, ServerCallContext context)
     {
-        await _service.Create(new Player
-        {
-            Name = request.Name,
-            TeamId = Guid.Parse(request.Team),
-        });
+        await _service.Create(_mapper.Map<Player>(request));
 
         return new CreatePlayerResponse();
     }
 
     public override Task<GetPlayerResponse> GetPlayer(GetPlayerRequest request, ServerCallContext context)
     {
-        if (!_service.TryGetById(Guid.Parse(request.Id), out Player player))
+        if (!_service.TryGetById(_mapper.Map<Guid>(request.Id), out Player player))
         {
             return Task.FromResult(new GetPlayerResponse());
         }
 
-        return Task.FromResult(new GetPlayerResponse
-        {
-            Id = player.Id.ToString(),
-            Name = player.Name,
-            Team = player.TeamId.ToString(),
-        });
+        return Task.FromResult(_mapper.Map<GetPlayerResponse>(player));
     }
 
     public override async Task<UpdatePlayerResponse> UpdatePlayer(UpdatePlayerRequest request, ServerCallContext context)
     {
-        var player = new Player
-        {
-            Id = Guid.Parse(request.Id),
-            Name = request.Name,
-            TeamId = Guid.Parse(request.Team),
-        };
+        var player = _mapper.Map<Player>(request);
 
         await _service.Update(player);
 
@@ -60,7 +49,7 @@ public class PlayerService : Service.Grpc.PlayerService.PlayerServiceBase
 
     public override async Task<DeletePlayerResponse> DeletePlayer(DeletePlayerRequest request, ServerCallContext context)
     {
-        await _service.Delete(Guid.Parse(request.Id));
+        await _service.Delete(_mapper.Map<Guid>(request.Id));
 
         return new DeletePlayerResponse();
     }

@@ -3,6 +3,7 @@ using TeamService.BusinessLogic.Entities;
 using TeamService.BusinessLogic.Interfaces;
 using TeamService.DataAccess.Contexts;
 using TeamService.DataAccess.Repositories;
+using TeamService.Grpc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Services.AddScoped<IRepository<Team>, TeamRepository>();
 builder.Services.AddScoped<IRepository<Player>, PlayerRepository>();
 builder.Services.AddScoped<IService<Team>, TeamService.BusinessLogic.Services.TeamService>();
 builder.Services.AddScoped<IService<Player>, TeamService.BusinessLogic.Services.PlayerService>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 

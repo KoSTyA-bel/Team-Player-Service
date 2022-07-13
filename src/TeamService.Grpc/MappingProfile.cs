@@ -12,6 +12,21 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()));
         CreateMap<GetTeamResponse, Team>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.Parse(src.Id)));
+        CreateMap<CreateTeamRequest, Team>();
+        CreateMap<UpdateTeamRequest, Team>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.Parse(src.Id)));
+
+        CreateMap<Player, GetPlayerResponse>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()))
+            .ForMember(dest => dest.Team, opt => opt.MapFrom(src => src.TeamId.ToString()));
+        CreateMap<CreatePlayerRequest, Player>()
+            .ForMember(dest => dest.TeamId, opt => opt.MapFrom(src => Guid.Parse(src.Team)))
+            .ForMember(dest => dest.Team, opt => opt.Ignore());
+        CreateMap<UpdatePlayerRequest, Player>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.Parse(src.Id)))
+            .ForMember(dest => dest.TeamId, opt => opt.MapFrom(src => Guid.Parse(src.Team)))
+            .ForMember(dest => dest.Team, opt => opt.Ignore());
+
         CreateMap<string, Guid>()
             .ConvertUsing(src => Guid.Parse(src));
         CreateMap<Guid, string>()
