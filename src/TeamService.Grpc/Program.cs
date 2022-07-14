@@ -15,15 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddGrpc();
 
-// insert into other method
-builder.Services.AddDbContextPool<TeamContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Data")));
-builder.Services.AddScoped<IDataContext, TeamDataContext>();
-//
-
-builder.Services.AddScoped<IRepository<Team>, TeamRepository>();
-builder.Services.AddScoped<IRepository<Player>, PlayerRepository>();
-builder.Services.AddScoped<IService<Team>, TeamService.BusinessLogic.Services.TeamService>();
-builder.Services.AddScoped<IService<Player>, TeamService.BusinessLogic.Services.PlayerService>();
+builder.Services.AddTeamContext(builder.Configuration.GetConnectionString("Data"));
+builder.Services.AddPlayerService();
+builder.Services.AddTeamService();
 
 builder.Services.AddScoped<IValidator<Player>, PlayerValidator>();
 builder.Services.AddScoped<IValidator<Team>, TeamValidator>();
