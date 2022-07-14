@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+option csharp_namespace = "Service.Grpc";
+
+package bgh_team_player;
+
+service TeamService {
+  rpc CreateTeam (.bgh_team_player.CreateTeamRequest) 
+  returns (.bgh_team_player.CreateTeamResponse);
+  rpc GetTeam (.bgh_team_player.GetTeamRequest) 
+  returns (.bgh_team_player.GetTeamResponse);
+  rpc UpdateTeam (.bgh_team_player.UpdateTeamRequest)
+  returns (.bgh_team_player.UpdateTeamResponse);
+  rpc DeleteTeam (.bgh_team_player.DeleteTeamRequest)
+  returns (.bgh_team_player.DeleteTeamResponse);
+}
+
+service PlayerService {
+  rpc CreatePlayer (.bgh_team_player.CreatePlayerRequest) 
+  returns (.bgh_team_player.CreatePlayerResponse);
+  rpc GetPlayer (.bgh_team_player.GetPlayerRequest) 
+  returns (.bgh_team_player.GetPlayerResponse);
+  rpc UpdatePlayer (.bgh_team_player.UpdatePlayerRequest)
+  returns (.bgh_team_player.UpdatePlayerResponse);
+  rpc DeletePlayer (.bgh_team_player.DeletePlayerRequest)
+  returns (.bgh_team_player.DeletePlayerResponse);
+}
+
+message CreateTeamRequest {
+  string name = 1;
+}
+
+message CreateTeamResponse {
+}
+
+message GetTeamRequest {
+  string id = 1;
+}
+
+message GetTeamResponse{
+  string id = 1;
+  string name = 2;
+}
+
+message UpdateTeamRequest {
+  string id = 1;
+  string name = 2;
+}
+
+message UpdateTeamResponse {
+}
+
+message DeleteTeamRequest {
+  string id = 1;
+}
+
+message DeleteTeamResponse {
+}
+
+message CreatePlayerRequest {
+  string name = 1;
+  string team = 2;
+}
+
+message CreatePlayerResponse {
+}
+
+message GetPlayerRequest {
+  string id = 1;
+}
+
+message GetPlayerResponse{
+  string id = 1;
+  string name = 2;
+  string team = 3;
+}
+
+message UpdatePlayerRequest {
+  string id = 1;
+  string name = 2;
+  string team = 3;
+}
+
+message UpdatePlayerResponse {
+}
+
+message DeletePlayerRequest {
+  string id = 1;
+}
+
+message DeletePlayerResponse {
+}
