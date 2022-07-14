@@ -1,9 +1,11 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using TeamService.BusinessLogic.Entities;
 using TeamService.BusinessLogic.Interfaces;
 using TeamService.DataAccess.Contexts;
 using TeamService.DataAccess.Repositories;
 using TeamService.Grpc;
+using TeamService.Grpc.ValidationSettings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,9 @@ builder.Services.AddScoped<IRepository<Team>, TeamRepository>();
 builder.Services.AddScoped<IRepository<Player>, PlayerRepository>();
 builder.Services.AddScoped<IService<Team>, TeamService.BusinessLogic.Services.TeamService>();
 builder.Services.AddScoped<IService<Player>, TeamService.BusinessLogic.Services.PlayerService>();
+
+builder.Services.AddScoped<IValidator<Player>, PlayerValidator>();
+builder.Services.AddScoped<IValidator<Team>, TeamValidator>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 

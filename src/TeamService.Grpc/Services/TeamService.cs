@@ -5,6 +5,7 @@ using TeamService.BusinessLogic.Entities;
 using TeamService.BusinessLogic.Interfaces;
 using Service.Grpc;
 using AutoMapper;
+using FluentValidation;
 
 namespace TeamService.Grpc.Services;
 
@@ -13,12 +14,14 @@ public class TeamService : Service.Grpc.TeamService.TeamServiceBase
     private readonly ILogger<TeamService> _logger;
     private readonly IService<Team> _service;
     private readonly IMapper _mapper;
+    private readonly IValidator<Team> _validator;
 
-    public TeamService(IService<Team> service, ILogger<TeamService> logger, IMapper mapper)
+    public TeamService(IService<Team> service, ILogger<TeamService> logger, IMapper mapper, IValidator<Team> validator)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        _validator = validator ?? throw new ArgumentNullException(nameof(validator));
     }
 
     public override async Task<CreateTeamResponse> CreateTeam(CreateTeamRequest request, ServerCallContext context)
