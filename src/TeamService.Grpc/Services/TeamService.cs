@@ -26,7 +26,13 @@ public class TeamService : Service.Grpc.TeamService.TeamServiceBase
 
     public override async Task<CreateTeamResponse> CreateTeam(CreateTeamRequest request, ServerCallContext context)
     {
-        await _service.Create(_mapper.Map<Team>(request));
+        var team = _mapper.Map<Team>(request);
+        var validationResult = await _validator.ValidateAsync(team);
+
+        if (validationResult.IsValid)
+        {
+            await _service.Create(team);
+        }
 
         return new CreateTeamResponse();
     }
@@ -44,8 +50,12 @@ public class TeamService : Service.Grpc.TeamService.TeamServiceBase
     public override async Task<UpdateTeamResponse> UpdateTeam(UpdateTeamRequest request, ServerCallContext context)
     {
         var team = _mapper.Map<Team>(request);
+        var validationResult = await _validator.ValidateAsync(team);
 
-        await _service.Update(team);
+        if (validationResult.IsValid)
+        {
+            await _service.Update(team);
+        }
 
         return new UpdateTeamResponse();
     }

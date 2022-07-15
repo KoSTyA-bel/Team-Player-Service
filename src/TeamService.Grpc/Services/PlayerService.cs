@@ -26,7 +26,13 @@ public class PlayerService : Service.Grpc.PlayerService.PlayerServiceBase
 
     public override async Task<CreatePlayerResponse> CreatePlayer(CreatePlayerRequest request, ServerCallContext context)
     {
-        await _service.Create(_mapper.Map<Player>(request));
+        var player = _mapper.Map<Player>(request);
+        var validationResult = await _validator.ValidateAsync(player);
+
+        if (validationResult.IsValid)
+        {
+            await _service.Create(player);
+        }
 
         return new CreatePlayerResponse();
     }
@@ -44,8 +50,12 @@ public class PlayerService : Service.Grpc.PlayerService.PlayerServiceBase
     public override async Task<UpdatePlayerResponse> UpdatePlayer(UpdatePlayerRequest request, ServerCallContext context)
     {
         var player = _mapper.Map<Player>(request);
+        var validationResult = await _validator.ValidateAsync(player);
 
-        await _service.Update(player);
+        if (validationResult.IsValid)
+        {
+            await _service.Update(player);
+        }
 
         return new UpdatePlayerResponse();
     }
