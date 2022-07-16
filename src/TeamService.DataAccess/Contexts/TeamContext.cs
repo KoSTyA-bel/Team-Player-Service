@@ -33,7 +33,7 @@ public class TeamContext : DbContext
     /// <value>
     /// The player.
     /// </value>
-    public DbSet<Player> Player { get; set; }
+    public DbSet<Player> Players { get; set; }
 
     /// <inheritdoc/>
     protected override void OnModelCreating(ModelBuilder modelBuilder)

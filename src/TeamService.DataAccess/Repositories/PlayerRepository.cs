@@ -35,16 +35,26 @@ public class PlayerRepository : IRepository<Player>
     public async Task Delete(Guid id)
     {
         var player = await this.GetById(id);
-        _context.Player.Remove(player);
+        _context.Players.Remove(player);
     }
 
     /// <inheritdoc/>
-    public Task<Player> GetById(Guid id) => _context.Player.FirstAsync(p => p.Id == id);
+    public Task<Player> GetById(Guid id) => _context.Players.FirstAsync(p => p.Id == id);
 
     /// <inheritdoc/>
     public Task<IEnumerable<Player>> GetRange(int startPoint, int count)
     {
-        throw new NotImplementedException();
+        if (startPoint <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(startPoint));
+        }
+
+        if (count <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(count));
+        }
+
+        return Task.FromResult((IEnumerable<Player>)_context.Players.Skip(startPoint).Take(count).ToArray());
     }
 
     /// <inheritdoc/>

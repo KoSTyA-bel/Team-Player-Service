@@ -43,7 +43,17 @@ public class TeamRepository : IRepository<Team>
     /// <inheritdoc/>
     public Task<IEnumerable<Team>> GetRange(int startPoint, int count)
     {
-        throw new NotImplementedException();
+        if (startPoint <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(startPoint));
+        }
+
+        if (count <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(count));
+        }
+
+        return Task.FromResult((IEnumerable<Team>)_context.Teams.Skip(startPoint).Take(count).ToArray());
     }
 
     /// <inheritdoc/>
