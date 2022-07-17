@@ -1,13 +1,13 @@
-﻿{
+{
   "profiles": {
     "TeamService.Grpc": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "applicationUrl": "http://localhost:5259;https://localhost:7217",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONNECTION_STRING": "Host=localhost;Port=5432;Database=Test;User Id=postgres;Password=kofein"
+      },
+      "applicationUrl": "http://localhost:5259;https://localhost:7217",
+      "dotnetRunMessages": true
     }
   }
 }
