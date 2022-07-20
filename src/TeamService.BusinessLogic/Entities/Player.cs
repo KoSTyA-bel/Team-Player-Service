@@ -3,7 +3,7 @@
 /// <summary>
 /// Entity for db.
 /// </summary>
-public class Player
+public class Player : IEquatable<Player>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Player"/> class.
@@ -47,4 +47,45 @@ public class Player
     /// The team.
     /// </value>
     public Team Team { get; set; }
+
+    public static bool operator ==(Player left, Player right)
+    {
+        return left != null ? left.Equals(right) : right == null;
+    }
+
+    public static bool operator !=(Player left, Player right) => !(left == right);
+
+    public override int GetHashCode()
+    {
+        return this.Id.GetHashCode() ^ this.TeamId.GetHashCode() ^ this.Name.GetHashCode();
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+
+        var player = obj as Player;
+
+        return this.Equals(player);
+    }
+
+    public bool Equals(Player? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+
+        return this.Id.Equals(other.Id)
+            && this.TeamId.Equals(other.TeamId)
+            && this.Name.Equals(other.Name, StringComparison.InvariantCulture);
+    }
+
+    public override string ToString()
+    {
+        return $"Player name: {this.Name}";
+    }
 }

@@ -3,7 +3,7 @@
 /// <summary>
 /// Entity for db.
 /// </summary>
-public class Team
+public class Team : IEquatable<Team>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Team"/> class.
@@ -38,6 +38,41 @@ public class Team
     /// The players.
     /// </value>
     public IEnumerable<Player> Players { get; set; }
+
+    public static bool operator ==(Team leaf, Team right)
+    {
+        return leaf != null ? leaf.Equals(right) : right == null;
+    }
+
+    public static bool operator !=(Team leaf, Team right) => !(leaf == right);
+
+    public override int GetHashCode()
+    {
+        return this.Id.GetHashCode() ^ this.Name.GetHashCode();
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+
+        var team = obj as Team;
+
+        return this.Equals(team);
+    }
+
+    public bool Equals(Team? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.Id.Equals(other.Id)
+            && this.Name.Equals(other.Name, StringComparison.InvariantCulture);
+    }
 
     /// <summary>
     /// Converts to string.
