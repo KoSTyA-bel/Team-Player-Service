@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamService.DataAccess", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{97D2B369-0EE6-46B2-B5F6-9F77EAB7D7EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamServuce.Tests", "TeamServuce.Tests\TeamServuce.Tests.csproj", "{7E491E12-7F9C-4016-87A3-DE9825F7D1BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamService.Tests", "TeamServuce.Tests\TeamService.Tests.csproj", "{7E491E12-7F9C-4016-87A3-DE9825F7D1BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamService.Migrator", "TeamService.Migrator\TeamService.Migrator.csproj", "{4C2256E7-370A-488B-83D3-B22284111DB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamService.Migrator", "TeamService.Migrator\TeamService.Migrator.csproj", "{4C2256E7-370A-488B-83D3-B22284111DB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

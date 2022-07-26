@@ -50,7 +50,7 @@ public class Player : IEquatable<Player>
 
     public static bool operator ==(Player left, Player right)
     {
-        return left != null ? left.Equals(right) : right == null;
+        return left is not null ? left.Equals(right) : right is null;
     }
 
     public static bool operator !=(Player left, Player right) => !(left == right);
@@ -74,7 +74,12 @@ public class Player : IEquatable<Player>
 
     public bool Equals(Player? other)
     {
-        if (other == null)
+        if (other is null)
+        {
+            return false;
+        }
+
+        if (this.GetHashCode() != other.GetHashCode())
         {
             return false;
         }

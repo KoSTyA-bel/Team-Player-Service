@@ -41,7 +41,7 @@ public class Team : IEquatable<Team>
 
     public static bool operator ==(Team leaf, Team right)
     {
-        return leaf != null ? leaf.Equals(right) : right == null;
+        return leaf is not null ? leaf.Equals(right) : right is null;
     }
 
     public static bool operator !=(Team leaf, Team right) => !(leaf == right);
@@ -53,7 +53,7 @@ public class Team : IEquatable<Team>
 
     public override bool Equals(object? obj)
     {
-        if (obj == null)
+        if (obj is null)
         {
             return false;
         }
