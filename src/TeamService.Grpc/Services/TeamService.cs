@@ -88,4 +88,24 @@ public class TeamService : Service.Grpc.TeamService.TeamServiceBase
 
         return new DeleteTeamResponse();
     }
+
+    public override async Task<GetTeamsResponse> GetTeams(GetTeamsRequest request, ServerCallContext context)
+    {
+        _logger.LogInformation($"GetTeams executed. \r\nRequest: {request}.");
+
+        if (request.StartPos < 0)
+        {
+            return new GetTeamsResponse();
+        }
+
+        var result = await _service.GetRange(request.StartPos, request.Count);
+
+        var response = new GetTeamsResponse();
+
+        response.Data.AddRange(_mapper.Map<IEnumerable<GetTeamResponse>>(result));
+
+        _logger.LogInformation($"GetTeams executed successfully.");
+
+        return response;
+    }
 }

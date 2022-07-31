@@ -88,4 +88,24 @@ public class PlayerService : Service.Grpc.PlayerService.PlayerServiceBase
 
         return new DeletePlayerResponse();
     }
+
+    public override async Task<GetPlayersResponse> GetPlayers(GetPlayersRequest request, ServerCallContext context)
+    {
+        _logger.LogInformation($"GetPlayers executed. \r\nRequest: {request}.");
+
+        if (request.StartPos < 0)
+        {
+            return new GetPlayersResponse();
+        }
+
+        var result = await _service.GetRange(request.StartPos, request.Count);
+
+        var response = new GetPlayersResponse();
+
+        response.Data.AddRange(_mapper.Map<IEnumerable<GetPlayerResponse>>(result));
+
+        _logger.LogInformation($"GetPlayers executed successfully.");
+
+        return response;
+    }
 }

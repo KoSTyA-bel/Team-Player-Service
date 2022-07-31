@@ -13,6 +13,8 @@ service TeamService {
   returns (.bgh_team_player.UpdateTeamResponse);
   rpc DeleteTeam (.bgh_team_player.DeleteTeamRequest)
   returns (.bgh_team_player.DeleteTeamResponse);
+  rpc GetTeams(.bgh_team_player.GetTeamsRequest)
+  returns (.bgh_team_player.GetTeamsResponse);
 }
 
 service PlayerService {
@@ -24,6 +26,8 @@ service PlayerService {
   returns (.bgh_team_player.UpdatePlayerResponse);
   rpc DeletePlayer (.bgh_team_player.DeletePlayerRequest)
   returns (.bgh_team_player.DeletePlayerResponse);
+  rpc GetPlayers(.bgh_team_player.GetPlayersRequest)
+  returns (.bgh_team_player.GetPlayersResponse);
 }
 
 message CreateTeamRequest {
@@ -89,4 +93,22 @@ message DeletePlayerRequest {
 }
 
 message DeletePlayerResponse {
+}
+
+message GetPlayersRequest{
+	int32 startPos = 1;
+	int32 count = 2;
+}
+
+message GetPlayersResponse{
+	repeated GetPlayerResponse data = 1;
+}
+
+message GetTeamsRequest{
+	int32 startPos = 1;
+	int32 count = 2;
+}
+
+message GetTeamsResponse{
+	repeated GetTeamResponse data = 1;
 }
