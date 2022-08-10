@@ -16,6 +16,7 @@ public class PlayerConfiguration : IEntityTypeConfiguration<Player>
     {
         builder.HasKey(player => player.Id);
         builder.Property(player => player.Id).ValueGeneratedOnAdd();
+        builder.Property(player => player.TeamId).HasDefaultValue(Guid.Empty);
 
         builder.Property(player => player.Name).IsRequired();
 

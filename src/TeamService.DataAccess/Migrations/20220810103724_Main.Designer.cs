@@ -12,8 +12,8 @@ using TeamService.DataAccess.Contexts;
 namespace TeamService.DataAccess.Migrations
 {
     [DbContext(typeof(TeamContext))]
-    [Migration("20220711093349_Initial")]
-    partial class Initial
+    [Migration("20220810103724_Main")]
+    partial class Main
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,11 +35,11 @@ namespace TeamService.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<Guid>("TeamId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValue(new Guid("00000000-0000-0000-0000-000000000000"));
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TeamId");
 
                     b.ToTable("Players", (string)null);
                 });
@@ -57,22 +57,6 @@ namespace TeamService.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teams", (string)null);
-                });
-
-            modelBuilder.Entity("TeamService.BusinessLogic.Entities.Player", b =>
-                {
-                    b.HasOne("TeamService.BusinessLogic.Entities.Team", "Team")
-                        .WithMany("Players")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Team");
-                });
-
-            modelBuilder.Entity("TeamService.BusinessLogic.Entities.Team", b =>
-                {
-                    b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
         }

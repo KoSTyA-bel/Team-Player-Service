@@ -13,7 +13,6 @@ public class Player : IEquatable<Player>
         Id = Guid.Empty;
         Name = string.Empty;
         TeamId = Guid.Empty;
-        Team = null;
     }
 
     /// <summary>
@@ -40,13 +39,6 @@ public class Player : IEquatable<Player>
     /// </value>
     public Guid TeamId { get; set; }
 
-    /// <summary>
-    /// Gets or sets the team.
-    /// </summary>
-    /// <value>
-    /// The team.
-    /// </value>
-    public Team Team { get; set; }
 
     public static bool operator ==(Player left, Player right)
     {

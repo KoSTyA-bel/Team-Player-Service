@@ -41,8 +41,6 @@ public class TeamContext : DbContext
         modelBuilder.ApplyConfiguration(new TeamConfiguration());
         modelBuilder.ApplyConfiguration(new PlayerConfiguration());
 
-        modelBuilder.Entity<Player>().HasOne(player => player.Team).WithMany(team => team.Players).HasForeignKey(player => player.TeamId);
-
         base.OnModelCreating(modelBuilder);
     }
 }

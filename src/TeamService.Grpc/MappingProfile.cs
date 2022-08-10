@@ -20,12 +20,10 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()))
             .ForMember(dest => dest.Team, opt => opt.MapFrom(src => src.TeamId.ToString()));
         CreateMap<CreatePlayerRequest, Player>()
-            .ForMember(dest => dest.TeamId, opt => opt.MapFrom(src => Guid.Parse(src.Team)))
-            .ForMember(dest => dest.Team, opt => opt.Ignore());
+            .ForMember(dest => dest.TeamId, opt => opt.MapFrom(src => string.IsNullOrEmpty(src.Team) ? Guid.Empty: Guid.Parse(src.Team)));
         CreateMap<UpdatePlayerRequest, Player>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.Parse(src.Id)))
-            .ForMember(dest => dest.TeamId, opt => opt.MapFrom(src => Guid.Parse(src.Team)))
-            .ForMember(dest => dest.Team, opt => opt.Ignore());
+            .ForMember(dest => dest.TeamId, opt => opt.MapFrom(src => Guid.Parse(src.Team)));
 
         CreateMap<string, Guid>()
             .ConvertUsing(src => Guid.Parse(src));

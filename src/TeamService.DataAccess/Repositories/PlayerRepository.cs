@@ -44,7 +44,7 @@ public class PlayerRepository : IRepository<Player>
     /// <inheritdoc/>
     public Task<IEnumerable<Player>> GetRange(int startPoint, int count)
     {
-        if (startPoint <= 0)
+        if (startPoint < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(startPoint));
         }

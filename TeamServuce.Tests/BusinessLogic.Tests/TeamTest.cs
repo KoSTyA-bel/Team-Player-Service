@@ -24,7 +24,7 @@ internal class TeamTest
     [TestCaseSource(nameof(Teams))]
     public void ToStringTest(Team team)
     {
-        Assert.AreEqual($"Team name: {team.Name}. Count of players: {team.Players.Count()}", team.ToString());
+        Assert.AreEqual($"Team name: {team.Name}.", team.ToString());
     }
 
     [TestCaseSource(nameof(Teams))]
@@ -34,7 +34,6 @@ internal class TeamTest
         {
             Name = first.Name,
             Id = first.Id,
-            Players = first.Players,
         };
 
         Assert.AreEqual(first, second);
@@ -73,7 +72,6 @@ internal class TeamTest
 
     [TestCase("Id", typeof(Guid))]
     [TestCase("Name", typeof(string))]
-    [TestCase("Players", typeof(IEnumerable<Player>))]
     public void CheckingForProperties(string properyName, Type propertyType)
     {
         var propertyInfo = typeof(Team).GetProperty(properyName, BindingFlags.Public | BindingFlags.Instance);

@@ -33,7 +33,6 @@ internal class PlayerTest
         {
             Name = first.Name,
             Id = first.Id,
-            Team = first.Team,
             TeamId = first.TeamId,
         };
 
@@ -74,7 +73,6 @@ internal class PlayerTest
     [TestCase("Id", typeof(Guid))]
     [TestCase("TeamId", typeof(Guid))]
     [TestCase("Name", typeof(string))]
-    [TestCase("Team", typeof(Team))]
     public void CheckingForProperties(string properyName, Type propertyType)
     {
         var propertyInfo = typeof(Player).GetProperty(properyName, BindingFlags.Public | BindingFlags.Instance);

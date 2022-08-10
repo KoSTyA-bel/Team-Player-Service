@@ -43,7 +43,7 @@ public class TeamRepository : IRepository<Team>
     /// <inheritdoc/>
     public Task<IEnumerable<Team>> GetRange(int startPoint, int count)
     {
-        if (startPoint <= 0)
+        if (startPoint < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(startPoint));
         }
