@@ -16,10 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\TeamService.BusinessLogic\TeamService.BusinessLogic.csproj" />
-    <ProjectReference Include="..\src\TeamService.DataAccess\TeamService.DataAccess.csproj" />
-    <ProjectReference Include="..\src\TeamService.Grpc\TeamService.Grpc.csproj" />
-    <ProjectReference Include="..\TeamService.Migrator\TeamService.Migrator.csproj" />
+    <ProjectReference Include="..\..\migrators\TeamService.Migrator\TeamService.Migrator.csproj" />
+    <ProjectReference Include="..\..\src\TeamService.BusinessLogic\TeamService.BusinessLogic.csproj" />
+    <ProjectReference Include="..\..\src\TeamService.DataAccess\TeamService.DataAccess.csproj" />
+    <ProjectReference Include="..\..\src\TeamService.Grpc\TeamService.Grpc.csproj" />
   </ItemGroup>
 
 </Project>
