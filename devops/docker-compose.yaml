@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+  team_player_service_grpc_postgres:
+    container_name: Team_Player_Postgres
+    image: postgres:13.3
+    env_file: .env
+    ports:
+      - 5555:5432
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d Test" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    volumes:
+      - .\\volumes\\postgres-data\\:/var/lib/postgresql/data
+
+  team_player_postgres_migrator:
+    container_name: Team_Player_Migrator
+    build:
+      context: ./../
+      dockerfile: ./migrators/TeamService.Migrator/Dockerfile
+    env_file: .env
+    command:
+      [
+        "dotnet",
+        "TeamService.Migrator.dll"
+      ]
+    healthcheck:
+            test: [ "CMD-SHELL", "echo", "1" ]
+            interval: 1s
+            timeout: 1s
+            retries: 5
+    depends_on:
+      team_player_service_grpc_postgres:
+        condition: service_healthy
+
+  team_player_grpc_service:
+    container_name: Team_PLayer_Grpc
+    build:
+      context: ./../
+      dockerfile: ./src/TeamService.Grpc/Dockerfile
+    env_file: .env
+    ports:
+      - 5064:80
+    depends_on:
+      team_player_postgres_migrator:
+        condition: service_completed_successfully
+      team_player_postgres_migrator:
+        condition: service_healthy
