@@ -13,9 +13,9 @@ namespace TeamService.Tests.BusinessLogic.Tests;
 
 internal class IRepositoryTest
 {
-    public static Mock<IRepository<Player>> GetPlayerMock()
+    public static Mock<IPlayerRepository> GetPlayerMock()
     {
-        var mock = new Mock<IRepository<Player>>();
+        var mock = new Mock<IPlayerRepository>();
 
         mock.Setup(repository => repository.Create(It.IsAny<Player>()))
             .Returns(Task.CompletedTask);
@@ -31,9 +31,9 @@ internal class IRepositoryTest
         return mock;
     }
 
-    public static Mock<IRepository<Team>> GetTeamMock()
+    public static Mock<ITeamRepository> GetTeamMock()
     {
-        var mock = new Mock<IRepository<Team>>();
+        var mock = new Mock<ITeamRepository>();
 
         mock.Setup(repository => repository.Create(It.IsAny<Team>()))
             .Returns(Task.CompletedTask);
@@ -49,9 +49,9 @@ internal class IRepositoryTest
         return mock;
     }
 
-    public static IRepository<Player> GetPlayerIRepository() => GetPlayerMock().Object;
+    public static IPlayerRepository GetPlayerIRepository() => GetPlayerMock().Object;
 
-    public static IRepository<Team> GetTeamIRepository() => GetTeamMock().Object;
+    public static ITeamRepository GetTeamIRepository() => GetTeamMock().Object;
 
     [TestCase("GetById")]
     [TestCase("Create")]
@@ -60,11 +60,11 @@ internal class IRepositoryTest
     [TestCase("GetRange")]
     public void CheckingForMethods(string methodName)
     {
-        var methodInfo = typeof(IRepository<Player>).GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
+        var methodInfo = typeof(IPlayerRepository).GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
 
         Check(typeof(Player));
 
-        methodInfo = typeof(IRepository<Team>).GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
+        methodInfo = typeof(ITeamRepository).GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
 
         Check(typeof(Team));
 

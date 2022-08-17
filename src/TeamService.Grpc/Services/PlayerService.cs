@@ -12,11 +12,11 @@ namespace TeamService.Grpc.Services;
 public class PlayerService : Service.Grpc.PlayerService.PlayerServiceBase
 {
     private readonly ILogger<TeamService> _logger;
-    private readonly IService<Player> _service;
+    private readonly IPlayerService _service;
     private readonly IMapper _mapper;
     private readonly IValidator<Player> _validator;
 
-    public PlayerService(ILogger<TeamService> logger, IService<Player> service, IMapper mapper, IValidator<Player> validator)
+    public PlayerService(ILogger<TeamService> logger, IPlayerService service, IMapper mapper, IValidator<Player> validator)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _service = service ?? throw new ArgumentNullException(nameof(service));

@@ -8,9 +8,9 @@ namespace TeamService.DataAccess.Repositories;
 /// <summary>
 /// Specific implementation <see cref="IRepository{T}"/>.
 /// </summary>
-/// <seealso cref="TeamService.BusinessLogic.Interfaces.IRepository{T}"/>
+/// <seealso cref="TeamService.BusinessLogic.Interfaces.IPlayerRepository"/>
 /// <seealso cref="TeamService.BusinessLogic.Entities.Player"/>
-public class PlayerRepository : IRepository<Player>
+public class PlayerRepository : IPlayerRepository
 {
     private readonly TeamContext _context;
 

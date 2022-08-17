@@ -6,10 +6,11 @@ using TeamService.DataAccess.Contexts;
 namespace TeamService.DataAccess.Repositories;
 
 /// <summary>
-/// Specific implementation <see cref="IRepository{T}"/>.
+/// Specific implementation <see cref="ITeamRepository"/>.
 /// </summary>
-/// <seealso cref="TeamService.BusinessLogic.Interfaces.IRepository&lt;TeamService.BusinessLogic.Entities.Team;" />
-public class TeamRepository : IRepository<Team>
+/// <seealso cref="TeamService.BusinessLogic.Interfaces.ITeamRepository"/>
+/// <seealso cref="TeamService.BusinessLogic.Entities.Player"/>
+public class TeamRepository : ITeamRepository
 {
     private readonly TeamContext _context;
 

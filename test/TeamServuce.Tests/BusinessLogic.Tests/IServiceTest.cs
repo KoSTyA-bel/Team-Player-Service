@@ -14,9 +14,9 @@ namespace TeamService.Tests.BusinessLogic.Tests;
 [TestFixture]
 internal class IServiceTest
 {
-    public static Mock<IService<Player>> GetPlayerMock()
+    public static Mock<IPlayerService> GetPlayerMock()
     {
-        var mock = new Mock<IService<Player>>();
+        var mock = new Mock<IPlayerService>();
         var player = new Player();
 
         mock.Setup(repository => repository.Create(It.IsAny<Player>()))
@@ -33,9 +33,9 @@ internal class IServiceTest
         return mock;
     }
 
-    public static Mock<IService<Team>> GetTeamMock()
+    public static Mock<ITeamService> GetTeamMock()
     {
-        var mock = new Mock<IService<Team>>();
+        var mock = new Mock<ITeamService>();
         var team = new Team();
 
         mock.Setup(repository => repository.Create(It.IsAny<Team>()))
@@ -52,9 +52,9 @@ internal class IServiceTest
         return mock;
     }
 
-    public static IService<Player> GetPlayerIService() => GetPlayerMock().Object;
+    public static IPlayerService GetPlayerIService() => GetPlayerMock().Object;
 
-    public static IService<Team> GetTeamIService() => GetTeamMock().Object;
+    public static ITeamService GetTeamIService() => GetTeamMock().Object;
 
     [TestCase("TryGetById")]
     [TestCase("Create")]
@@ -63,11 +63,11 @@ internal class IServiceTest
     [TestCase("GetRange")]
     public void CheckingForMethods(string methodName)
     {
-        var methodInfo = typeof(IService<Player>).GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
+        var methodInfo = typeof(IPlayerService).GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
 
         Check(typeof(Player));
 
-        methodInfo = typeof(IService<Team>).GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
+        methodInfo = typeof(ITeamService).GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
 
         Check(typeof(Team));
 

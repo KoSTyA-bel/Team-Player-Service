@@ -12,15 +12,15 @@ public static class ServiceExtentions
 {
     public static IServiceCollection AddPlayerService(this IServiceCollection services)
     {
-        services.AddScoped<IRepository<Player>, PlayerRepository>();
-        services.AddScoped<IService<Player>, PlayerService>();
+        services.AddScoped<IPlayerRepository, PlayerRepository>();
+        services.AddScoped<IPlayerService, PlayerService>();
         return services;
     }
 
     public static IServiceCollection AddTeamService(this IServiceCollection services)
     {
-        services.AddScoped<IRepository<Team>, TeamRepository>();
-        services.AddScoped<IService<Team>, TeamService.BusinessLogic.Services.TeamService>();
+        services.AddScoped<ITeamRepository, TeamRepository>();
+        services.AddScoped<ITeamService, TeamService.BusinessLogic.Services.TeamService>();
         return services;
     }
 

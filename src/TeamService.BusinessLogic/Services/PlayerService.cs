@@ -4,12 +4,11 @@ using TeamService.BusinessLogic.Interfaces;
 namespace TeamService.BusinessLogic.Services;
 
 /// <summary>
-/// Specific implementation <see cref="IService{T}"/>.
+/// Specific implementation <see cref="IPlayerService"/>.
 /// </summary>
-/// <seealso cref="TeamService.BusinessLogic.Interfaces.IService&lt;TeamService.BusinessLogic.Entities.Player&gt;" />
-public class PlayerService : IService<Player>
+public class PlayerService : IPlayerService
 {
-    private readonly IRepository<Player> _repository;
+    private readonly IPlayerRepository _repository;
     private readonly IDataContext _dataContext;
 
     /// <summary>
@@ -18,7 +17,7 @@ public class PlayerService : IService<Player>
     /// <param name="repository">The repository.</param>
     /// <param name="dataContext">The data context.</param>
     /// <exception cref="System.ArgumentNullException">When <paramref name="dataContext"/> or <paramref name="repository"/> is null.</exception>
-    public PlayerService(IRepository<Player> repository, IDataContext dataContext)
+    public PlayerService(IPlayerRepository repository, IDataContext dataContext)
     {
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         _dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));

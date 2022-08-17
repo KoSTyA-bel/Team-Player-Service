@@ -4,12 +4,13 @@ using TeamService.BusinessLogic.Interfaces;
 namespace TeamService.BusinessLogic.Services;
 
 /// <summary>
-/// Specific implementation <see cref="IService{T}"/>.
+/// Specific implementation <see cref="ITeamService}"/>.
 /// </summary>
-/// <seealso cref="TeamService.BusinessLogic.Interfaces.IService&lt;TeamService.BusinessLogic.Entities.Team&gt;" />
-public class TeamService : IService<Team>
+/// <seealso cref="TeamService.BusinessLogic.Interfaces.ITeamService"/>
+/// <seealso cref="TeamService.BusinessLogic.Interfaces.ITeamService&gt;TeamService.BusinessLogic.Entities.Team&gt;" />
+public class TeamService : ITeamService
 {
-    private readonly IRepository<Team> _repository;
+    private readonly ITeamRepository _repository;
     private readonly IDataContext _dataContext;
 
     /// <summary>
@@ -18,7 +19,7 @@ public class TeamService : IService<Team>
     /// <param name="repository">The repository.</param>
     /// <param name="dataContext">The data context.</param>
     /// <exception cref="System.ArgumentNullException">When <paramref name="dataContext"/> or <paramref name="repository"/> is null.</exception>
-    public TeamService(IRepository<Team> repository, IDataContext dataContext)
+    public TeamService(ITeamRepository repository, IDataContext dataContext)
     {
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         _dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));

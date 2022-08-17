@@ -12,11 +12,11 @@ namespace TeamService.Grpc.Services;
 public class TeamService : Service.Grpc.TeamService.TeamServiceBase
 {
     private readonly ILogger<TeamService> _logger;
-    private readonly IService<Team> _service;
+    private readonly ITeamService _service;
     private readonly IMapper _mapper;
     private readonly IValidator<Team> _validator;
 
-    public TeamService(IService<Team> service, ILogger<TeamService> logger, IMapper mapper, IValidator<Team> validator)
+    public TeamService(ITeamService service, ILogger<TeamService> logger, IMapper mapper, IValidator<Team> validator)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
