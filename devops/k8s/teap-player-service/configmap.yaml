@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-for-team-player-service
+data:
+  CONNECTION_STRING: host=postgresdatabase;Port=5432;Database=Test;User Id=admin;Password=psltest
+  POSTGRES_PASSWORD: psltest 

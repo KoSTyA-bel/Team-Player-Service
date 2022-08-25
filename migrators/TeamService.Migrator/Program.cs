@@ -10,3 +10,9 @@ var context = new TeamContext(optionsBuilder.Options);
 await context.Database.MigrateAsync();
 
 Console.WriteLine("Migration was succesful.");
+
+while (true)
+{
+    string message = Console.ReadLine();
+    Console.WriteLine(message);
+}

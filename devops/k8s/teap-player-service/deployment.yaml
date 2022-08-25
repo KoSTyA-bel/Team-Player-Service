@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teap-player-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teap-player-service
+  strategy:
+    rollingUpdate:
+      maxSurge: 10%
+      maxUnavailable: 10%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: teap-player-service
+    spec:
+      containers:
+      - image: migrator:v1
+        name: team-player-migrator
+        envFrom:
+        - configMapRef:
+            name: configmap-for-team-player-service
+      - image: teamplayerservicegrpc:v1
+        name: team-player-service
+        envFrom:
+        - configMapRef:
+            name: configmap-for-team-player-service
+        ports:
+        - containerPort: 80
+        - containerPort: 443
